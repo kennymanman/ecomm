@@ -8,7 +8,7 @@ export default function Home() {
 
     <Navigation />
         
-        Homer
+        Homere
         
         
         </div>
