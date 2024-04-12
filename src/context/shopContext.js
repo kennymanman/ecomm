@@ -7,8 +7,7 @@ const ShopContext = React.createContext();
 const client = Client.buildClient({
     storefrontAccessToken: 'c3580c41c72cdb6a40c617cc47ced006',
     domain: 'famousandunkno.myshopify.com'
-   
-  });
+    });
 
 
 
