@@ -3,10 +3,12 @@ import Shop from "./pages/Shop";
 import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
-import Productdetail from "./pages/Productdetail";
 import Error from "./pages/Error";
 import SideMenu from "./components/SideMenu";
-
+import Filters from "./pages/Filters";
+import Contact from "./pages/Contact";
+import Lagalleria from "./pages/Lagalleria";
+import Photobooths from "./pages/Photobooths";
 
 
 
@@ -21,7 +23,7 @@ function App() {
   <Cart/> 
         <Routes>
 
-          {/* <Route path="/ProductDetails/:id" element={<ProductDetails/>} /> */}
+
           
          
 
@@ -31,12 +33,16 @@ function App() {
 
         <Route path="/Cart" element={<Cart />} />
 
-    
 
-        <Route path="/Productdetail" element={<Productdetail />} />
+        <Route path="/Contact" element={<Contact />} />
 
-        {/* <Route path="/products/:productId" element={<ProductDetails/>} /> */}
+        <Route path="/Filters" element={<Filters />} />
 
+        <Route path="/Photobooths" element={<Photobooths />} />
+
+        <Route path="/Lagalleria" element={<Lagalleria />} />
+
+      
 
         <Route path="/products/:handle" element={<ProductDetails/>} />
         

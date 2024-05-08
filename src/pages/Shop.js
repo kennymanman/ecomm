@@ -30,7 +30,7 @@ console.log(products)
 
 
   return (
-    <div>
+    <div className='bg-orange-50'>
 
       <Navigation/>
 

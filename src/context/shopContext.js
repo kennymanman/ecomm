@@ -1,22 +1,23 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import Client from 'shopify-buy'
 
 const ShopContext = React.createContext();
 
 
 const client = Client.buildClient({
-    storefrontAccessToken: 'c3580c41c72cdb6a40c617cc47ced006',
-    domain: 'famousandunkno.myshopify.com'
+    storefrontAccessToken: '46917c779ee4279f80f25181c4f3c5e8',
+    domain: 'famousandunknown.myshopify.com'
     });
 
 
-
-
+   
+ 
 
 class ShopProvider extends Component {
 
 state= {
     product:{},
+    collections:{},
     products:[],
     checkout: {},
     isCartOpen: false,
@@ -63,6 +64,8 @@ createCheckout = async () => {
 
 
 
+
+
 addItemToCheckout = async (variantId, quantity) => {
   const lineItemsToAdd = [
     {
@@ -78,6 +81,9 @@ addItemToCheckout = async (variantId, quantity) => {
 
   this.openCart();
 };
+
+
+
 
 
 
@@ -107,6 +113,35 @@ fetchAllProducts = async () => {
 }
 
 
+
+// getCollectionProducts = async (collectionId) => {
+
+    
+//   const collection = await client.collection.fetchWithProducts(collectionId);
+//    return collection.products;
+//   //  this.setState({ collection: collection})
+// };
+
+
+
+getCollectionProducts = async () => {
+
+    
+const collections = await client.collection.fetchAllWithProducts().then((collections) => {
+
+console.log(collections)
+console.log(collections[0].products);
+
+this.setState({ collections: collections})
+  });
+   
+ 
+
+};
+
+
+
+
 fetchProductWithHandle = async (handle) => {
 
     const product = await client.product.fetchByHandle(handle)
@@ -114,6 +149,19 @@ fetchProductWithHandle = async (handle) => {
     this.setState({ product: product })
     
 }
+
+
+
+// fetchCollectionWithId = async (collectionId) => {
+
+//    const collectionID = await client.collection.fetchWithProducts(collectionId, {productsFirst: 10})
+
+//    this.setState({collectionID: collectionID})
+
+//    console.log(collectionID);
+//    console.log(collectionID.products);
+// }
+
 
 
 
@@ -133,7 +181,7 @@ openMenu = () => {this.setState({ isMenuOpen: true })}
 render() {
 
 
-    console.log(this.state.checkout)
+    // console.log(this.state.checkout)
 
 
   return (
@@ -148,7 +196,9 @@ render() {
         closeMenu: this.closeMenu,
         openMenu: this.openMenu,
         addItemToCheckout: this.addItemToCheckout,
-        removeLineItem: this.removeLineItem
+        removeLineItem: this.removeLineItem,
+        getCollectionProducts: this.getCollectionProducts
+        
       }}
     
     

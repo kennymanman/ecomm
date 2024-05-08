@@ -1,23 +1,23 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../context/shopContext'
 import Navigation from '../components/Navigation';
+import VariantSelector from '../components/VariantSelector';
 
 
 
 export default function ProductDetails() {
 
-  const {fetchAllProducts, products, product, addItemToCheckout, fetchProductWithHandle } = useContext(ShopContext)
-   
-  const navigate = useNavigate();
+const {fetchAllProducts, products, product, addItemToCheckout, fetchProductWithHandle } = useContext(ShopContext)
 
+const navigate = useNavigate();
 
-  let { handle } = useParams()
-
+let { handle } = useParams()
 
 
   useEffect(() => {
     fetchProductWithHandle(handle)
+    .then(data => console.log(data))
   }, [fetchProductWithHandle, handle])
 
   useEffect(() => {
@@ -35,10 +35,8 @@ export default function ProductDetails() {
 
 console.log(product)
 
-    
-
-
-  return (
+   
+return (
     <div>
       <Navigation/>
 
@@ -53,15 +51,25 @@ console.log(product)
 
 
 
-<h1 className='text-4xl tracking-tighter'>Name{product.title} </h1>
 
+  
+<h1 className='text-4xl tracking-tighter'>Name{product.title} </h1>
 <img src={product.images[0].src} alt="" /> 
 
 <p className=' tracking-tighter'>details: {product.description} </p>
 
+
+
+<button  onClick={() => product.variants && addItemToCheckout(product.variants[0].id, 1)}>
+Add to Cart
+</button>
+
+
 <button className='px-4 py-2 bg-orange-400 rounded-lg m-4 tracking-tighter ' onClick={() => addItemToCheckout(product.variants[0].id, 1)}>
 Add to Cart
 </button>
+
+
 
     </div>
   )

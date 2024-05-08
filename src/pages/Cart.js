@@ -70,7 +70,7 @@ export default function Cart() {
                     <div className="mt-8">
                       <div className="flow-root">
 
-                      <p className='text-lg font-medium text-gray-900 tracking-tighter mb-4'> total items: {checkout.lineItems?.length}</p>
+                       <p className='text-lg font-medium text-gray-900 tracking-tighter mb-4'> total items: {checkout?.lineItems?.length}</p> 
                       
                         <ul role="list" className="-my-6 divide-y divide-gray-200">
 
@@ -79,7 +79,8 @@ export default function Cart() {
 
                           
                              
-                          { checkout.lineItems?.length ? checkout.lineItems.map(item => (
+                          { checkout?.lineItems?.length ?(
+                           checkout.lineItems.map(item => (
                              
                             <li keys={item.id} className="flex py-6">
                               <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -117,15 +118,13 @@ export default function Cart() {
                                 </div>
                               </div>
                             </li>
-                          )):<h1 className='tracking-tighter text-2xl'>Cart is Empty</h1>
-                          
+                          ))):<h1 className='tracking-tighter text-2xl'>Cart is Empty</h1>
+                               
                     }
 
                         </ul>
 
                            
-
-
 
 
                       </div>
@@ -141,8 +140,8 @@ export default function Cart() {
                       <p>Subtotal</p>
                      
 
-                      { checkout.lineItems?.length?
-                      <p className='text-2xl'>${checkout.lineItemsSubtotalPrice.amount}</p>:<p>$0.00</p>
+                      { checkout?.lineItems?.length?
+                      <p className='text-2xl'>₦{checkout.lineItemsSubtotalPrice.amount}</p>:<p>₦0.00</p>
                       
                        } 
 
@@ -155,7 +154,7 @@ export default function Cart() {
                     <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                     <div className="mt-6">
 
-                    { checkout.lineItems?.length ?
+                    { checkout?.lineItems?.length ?
                       <a
                         href={checkout?.webUrl}
                         className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 "
