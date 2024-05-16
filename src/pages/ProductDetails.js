@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../context/shopContext'
 import Navigation from '../components/Navigation';
-import VariantSelector from '../components/VariantSelector';
+import VariantSelect from '../components/VariantSelect';
 
 
 
@@ -33,7 +33,7 @@ let { handle } = useParams()
 
 
 
-console.log(product)
+console.log("products", product)
 
    
 return (
@@ -60,7 +60,13 @@ return (
 
 
 
-<button  onClick={() => product.variants && addItemToCheckout(product.variants[0].id, 1)}>
+<button  onClick={() => product.variants && addItemToCheckout(product.variants[0].id, 1) }>
+Add to Cart
+</button>
+
+
+
+<button className='px-4 py-2 bg-orange-400 rounded-lg m-4 tracking-tighter ' onClick={() => addItemToCheckout(product.variants?.[0].id ?? product.id, 1)}>
 Add to Cart
 </button>
 
@@ -68,6 +74,11 @@ Add to Cart
 <button className='px-4 py-2 bg-orange-400 rounded-lg m-4 tracking-tighter ' onClick={() => addItemToCheckout(product.variants[0].id, 1)}>
 Add to Cart
 </button>
+
+
+
+
+<VariantSelect/>
 
 
 

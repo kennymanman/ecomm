@@ -29,6 +29,7 @@ state= {
 
 
 componentDidMount() {
+  console.log("localstorage", localStorage.checkout_id)
     if (localStorage.checkout_id) {
       this.fetchCheckout(localStorage.checkout_id)
     } else {
@@ -43,6 +44,7 @@ componentDidMount() {
 createCheckout = async () => {
     const checkout = await client.checkout.create();
     localStorage.setItem("checkout_id", checkout.id)
+    console.log({checkout})//test
     this.setState({ checkout: checkout });
   };
 
@@ -54,6 +56,7 @@ createCheckout = async () => {
     client.checkout
       .fetch(checkoutId)
       .then((checkout) => {
+        console.log({checkout})//test
         this.setState({ checkout: checkout });
       })
       .catch((error) => console.log(error));
@@ -80,6 +83,9 @@ addItemToCheckout = async (variantId, quantity) => {
   this.setState({ checkout: checkout });
 
   this.openCart();
+
+  
+
 };
 
 
