@@ -1,78 +1,69 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { ShopContext } from '../context/shopContext'
 import Navigation from "../components/Navigation"
 import { Link } from 'react-router-dom'
-import { useNavigate } from "react-router-dom";
-
 
 
 
 export default function Shop() {
 
-const {fetchAllProducts, products} = useContext(ShopContext)
+    const { getCollectionProducts, collections} = useContext(ShopContext)
+
+    const [products, setProducts] = useState([]);
 
 
+    useEffect(() => {
 
-
-
-useEffect(() => {
-
-  fetchAllProducts()
-}, [fetchAllProducts])
-
-if (!products) return <div>Loading.....</div>
-
-console.log(products)
-
+        getCollectionProducts()
+      }, [getCollectionProducts])
+      
+      if (!collections) return <div>Loading.....</div>
+      
+      console.log(collections)
+      console.log(collections[1]);
 
 
 
 
 
   return (
-    <div className='bg-orange-50'>
-
-      <Navigation/>
-
- 
-      
-      <h1 className="text-5xl tracking-tighter my-9">SHOP.</h1>
-
-      {
-        products.map(product => (
-
-          <div key={product.id} >
-          <img src={product.images[0].src} alt=""  />
-          
-        
 
 
-            
-          <h2>${product.variants[0].price.amount}</h2>
+    <div className='bg-amber-50'>
+
+
+    <Navigation/>    
+
+
+    <div className='grid grid-cols-3 gap-3'>
+
+      {/* This is a seperate collection, to change the collection change the number in collections[?].products.map */}
+
+        {collections.length > 0 && ( // Check if collections exist
+        collections[1].products.map((product) => (
+
          
+<div key={product.id}>
+             
+            <img className='object-fit w-full h-96 object-cover' src={product.images[0].src} alt=""  />
+  
+             <div>
+              <h3>{product.title}</h3>
+              <h3>₦{product.variants[0].price.amount}</h3>
+              <Link to={`/products/${product.handle}`} key={product.id}   className="text-lg tracking-tighter text-green-500">
+              <button className='bg-green-500 tracking-tighter text-black px-8 rounded-full'>Buy</button>
+              </Link>
+              </div> 
+</div>
 
 
-
+))
+      )} 
+   
+     </div>   
+        
         
 
-            <Link to={`/products/${product.handle}`} key={product.id}   className="text-lg tracking-tighter text-green-500">
-            {product.title} 
-            </Link>
-
-
-
-
-            </div>
-
-          
-
-          
-        ))
-      }
-
-
-
-
-    </div>
+        </div>
   )
 }

@@ -24,6 +24,7 @@ export default function Lagalleria() {
 
 
 
+
   return (
 
 
@@ -35,11 +36,13 @@ export default function Lagalleria() {
 
     <div className='grid grid-cols-3 gap-3'>
 
+       {/* This is a seperate collection, to change the collection change the number in collections[?].products.map */}
+
         {collections.length > 0 && ( // Check if collections exist
         collections[0].products.map((product) => (
 
          
-<div  key={product.id}>
+<div key={product.id}>
              
             <img className='object-fit w-full h-96 object-cover' src={product.images[0].src} alt=""  />
   
@@ -56,13 +59,6 @@ export default function Lagalleria() {
 ))
       )} 
 
-
-
-
-        
-        
-        
-        
         
      </div>   
         

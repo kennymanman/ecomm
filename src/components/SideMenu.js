@@ -122,11 +122,15 @@ export default function SideMenu() {
                         </Link>
 
 
+
                         <Link to="/Contact" >
-                       <p className='tracking-tighter text-3xl my-4 '>Contact</p> 
+                       <p className='tracking-tighter text-3xl my-4 '>About</p> 
                         </Link>
 
 
+                        <Link to="/Contact" >
+                       <p className='tracking-tighter text-3xl my-4 '>Contact</p> 
+                        </Link>
 
 
                         

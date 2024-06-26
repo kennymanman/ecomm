@@ -1,7 +1,9 @@
-import React, {useState, Fragment, useContext} from 'react'
+import React, {useState, Fragment, useContext, useEffect} from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ShopContext } from '../context/shopContext'
+import CartQuantitySelector from '../components/CartQuantitySelector';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 
 
@@ -13,9 +15,79 @@ export default function Cart() {
 
     const {isCartOpen, closeCart, checkout, removeLineItem} = useContext(ShopContext)
 
-    const {fetchAllProducts, products} = useContext(ShopContext)
+   
 
     console.log(checkout)
+
+
+const [quantity, setQuantity] = useState(1)
+
+const [selectedQuantity, setSelectedQuantity] = useState(quantity && 1)
+
+const {fetchAllProducts, products, product, addItemToCheckout, fetchProductWithHandle } = useContext(ShopContext)
+
+
+const [selectedVariant, setSelectedVariant] = useState(product.variants );
+
+
+
+
+// const navigate = useNavigate();
+// let { handle } = useParams()
+
+
+
+
+// useEffect(() => {
+//   fetchProductWithHandle(handle)
+//   .then(data => console.log(data))
+// }, [fetchProductWithHandle, handle])
+
+// useEffect(() => {
+ 
+//  ( async ()=> {
+//   await fetchAllProducts()
+//   setSelectedVariant(product.variants && product.variants[0].id)
+// } )()
+// }, [fetchAllProducts, setSelectedVariant, product])
+
+
+// console.log("products", product)
+
+// if (!product.title) return <div>loading...</div>
+
+// if (!product.variants) return null;
+
+// if (!quantity) return null;
+
+
+
+
+
+
+
+
+
+
+
+     // Handle quantity change from NumberSelector component
+     const handleQuantityChange = (newQuantity) => {
+      setQuantity(newQuantity);
+    };
+
+
+
+
+    // const handleAddToCart = () => {
+    //   if (selectedVariant && quantity > 0) {
+    //     addItemToCheckout(selectedVariant, quantity); // Pass quantity to addItemToCheckout
+    //   } else {
+    //     // Handle error or notification if variant or quantity is invalid
+    //     console.error("Please select a variant and quantity before adding to cart");
+    //   }
+      
+    //   console.log("17thJune", selectedVariant, quantity)
+    // };
     
 
   return (
@@ -84,27 +156,79 @@ export default function Cart() {
                              
                             <li key={item.id} className="flex py-6">
                               <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+
+                              <Link to={`/products/${product.handle}`} key={product.id}   className="">
                                 <img
                                   src={item.variant.image.src}
                                   alt={item.imageAlt}
                                   className="h-full w-full object-cover object-center"
                                 />
+                               </Link>
+
+
                               </div>
 
                               <div className="ml-4 flex flex-1 flex-col">
                                 <div>
                                   <div className="flex justify-between text-base font-medium text-gray-900">
-                                    <h3>
+                                    
+                                 <div>  
+                                    <h3 className='text-lg'>
                                       <a href={item.href}>{item.title}</a>
                                     </h3>
-                                    <p className="ml-4">{item.variant.price.amount}</p>
+                                    
+
+                                    <div className='flex justify-between gap-3'>
+                                    <p className='tracking-tighter text-gray-500'>Price</p>
+                                    <h3 className='text-md'>
+
+                                      <a href={item.href}>{item.variant.price.amount}</a>
+                                    </h3>
+                                    </div>
+
+
+
+
+
+
+                                    <div className='flex justify-between'>
+                                    <p className='tracking-tighter text-gray-500'>Color</p>
+                                    <h3 className='text-md'>
+
+                                      <a href={item.href}>{item.variant.title}</a>
+                                    </h3>
+                                    </div>
+
+
+                                    <p className="text-gray-500">Qty {item.quantity}x</p>
+
+                                    
+
+                                    </div>
+
                                   </div>
-                                  <p className="mt-1 text-sm text-gray-500">{item.color}</p>
+                                 
                                 </div>
-                                <div className="flex flex-1 items-end justify-between text-sm">
-                                  <p className="text-gray-500">Qty {item.quantity}</p>
+
+
+                                <div className="flex flex-1  justify-between text-sm">
+                                 
+
+                                {/* <CartQuantitySelector quantity={quantity} onQuantityChange={handleQuantityChange} /> */}
+
+
+
+
 
                                   <div className="flex">
+
+
+
+                                  {/* <QuantitySelector quantity={quantity} onQuantityChange={handleQuantityChange} /> */}
+
+
+
+
                                     <button
                                      
                                       type="button"
@@ -115,8 +239,15 @@ export default function Cart() {
                                       Remove
                                     </button>
                                   </div>
+
+                                  
                                 </div>
+                                
                               </div>
+
+
+                             
+                              
                             </li>
                           ))):<h1 className='tracking-tighter text-2xl'>Cart is Empty</h1>
                                
@@ -125,7 +256,7 @@ export default function Cart() {
                         </ul>
 
                            
-
+                      
 
                       </div>
                     </div>

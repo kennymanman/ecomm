@@ -32,7 +32,7 @@ export default function Photobooths() {
         
         
         {collections.length > 0 && ( // Check if collections exist
-        collections[0].products.map((product) => (
+        collections[2].products.map((product) => (
 
 
            <div className='grid grid-cols-3'> 

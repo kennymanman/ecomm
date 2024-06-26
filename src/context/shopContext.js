@@ -38,6 +38,10 @@ componentDidMount() {
   }
 
 
+  quantity() {
+
+    
+  }
  
 
 

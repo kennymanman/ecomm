@@ -10,6 +10,7 @@ root.render(
   <React.StrictMode>
     <ShopProvider>
     <App />
+
     </ShopProvider>
    
   </React.StrictMode>

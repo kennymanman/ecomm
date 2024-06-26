@@ -1,47 +1,116 @@
-
-import React, { useState } from 'react';
-
-
+import React, {useState} from 'react';
+import { DropdownMenu, DropdownButton, DropdownItem } from 'react-bootstrap'; // Tailwind CSS Dropdown components
 
 
 
-function VariantSelect() {
-    const [isOpen, setIsOpen] = useState(false);
-    const items = ['Option 1', 'Option 2', 'Option 3'];
-  
-    const toggleDropdown = () => setIsOpen(!isOpen);
-  
-    const handleClick = (item) => {
-      // Handle item selection here (optional)
-      console.log('Selected item:', item);
-      setIsOpen(false); // Close dropdown after selection (optional)
+
+
+
+
+function VariantSelect({ product, selectedVariant, onVariantSelection, setSelectedVariant}) {
+
+    // const [selected, setSelected] = useState()
+
+
+    // const [isActive, setIsActive] = useState(false);
+
+
+    // const handleClick = () => {
+    //   setIsActive(!isActive); // Toggle active state on click
+    // };
+
+
+
+
+
+    const [isActive, setIsActive] = useState(selectedVariant?.id || null); // Set initial active based on selectedVariant
+
+    const handleClick = (variantId) => {
+      onVariantSelection(product.variants.find((variant) => variant.id === variantId));
+      setSelectedVariant(variantId);
+      setIsActive(variantId); // Update active state on selection
     };
-  
-    return (
-      <div className="relative">
-        <button
-          className="px-3 py-2 rounded text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          onClick={toggleDropdown}
-        >
-          Variant Selector
-        </button>
-        {isOpen && (
-          <ul
-            className="absolute z-50 mt-2 w-full rounded-md shadow-sm bg-white dark:bg-gray-800 overflow-hidden"
-          >
-            {items.map((item) => (
-              <li
-                key={item}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"
-                onClick={() => handleClick(item)}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    );
-  }
-  
-  export default VariantSelect;
+
+
+
+
+
+
+
+
+
+
+  const variantOptions = product.variants.map((variant) => (
+
+
+
+
+
+
+
+
+<div className='' key={variant.id}>
+<button
+  className={`
+    border-black border-2 rounded-full  px-6 py-1  hover:bg-lime-200 
+    ${variant.id === isActive ? 'bg-black text-white' : 'bg-white'}
+  `}
+  key={variant.id}
+  onClick={() => handleClick(variant.id)}
+>
+  <h2 className=' text-bold text-xl tracking-tighter '>
+    {variant.title}
+  </h2>
+</button>
+</div>
+
+
+  ));
+
+
+
+
+
+
+
+
+
+
+  const selectedVariantTitle = selectedVariant ? selectedVariant.title : 'Select Variant';
+
+  return (
+    //  <DropdownButton id="dropdown-basic-button" title={selectedVariantTitle}>
+    //    {variantOptions}
+    // </DropdownButton>
+
+<div className=''>
+<p className='' title={selectedVariantTitle}>
+
+{variantOptions}
+</p>
+
+
+
+{/* <div className='flex flex-row '>
+<button className={` ${isActive ? 'active:bg-blue-500' : ''}`}  key={variant.id} onClick={() => {
+      onVariantSelection(variant)
+      setSelectedVariant(variant.id)
+      handleClick()
+   
+      }}>
+
+<h2 className='border-2 border-black rounded-full text-bold text-xl tracking-tighter px-2 '>{variant.title}</h2>
+</button>
+</div> */}
+
+
+</div>
+
+
+
+
+
+  );
+}
+
+export default VariantSelect;
