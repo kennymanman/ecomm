@@ -6,8 +6,29 @@
 
 
 @font-face {
-  font-family: 'cardinalfruitregular';
- src: url("../public/fonts/cardinalfruitregular.otf") format('otf');
+  font-family: 'cardinalfruitweb-regular-TRIAL';
+ src: url('fonts/cardinalfruitweb-regular-TRIAL.woff') format('woff'); 
+}
+
+
+
+@font-face {
+  font-family: 'cardinalfruitweb-italic-TRIAL';
+ src: url('fonts/cardinalfruitweb-italic-TRIAL.woff') format('woff'); 
+}
+
+
+@font-face {
+  font-family: 'ApfelGrotezk-Regular';
+ src: url('fonts/ApfelGrotezk-Regular.woff') format('woff'); 
+}
+
+
+
+
+@font-face {
+  font-family: 'SuisseIntl-Regular';
+ src: url('fonts/SuisseIntl-Regular.woff') format('woff'); 
 }
 
 

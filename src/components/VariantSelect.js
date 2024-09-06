@@ -47,12 +47,12 @@ function VariantSelect({ product, selectedVariant, onVariantSelection, setSelect
 
 
 
-
+<div className=''>
 
 <div className='' key={variant.id}>
 <button
   className={`
-    border-black border-2 rounded-full  px-6 py-1  hover:bg-lime-200 
+    border-black border-2 rounded-full   px-6 py-1 
     ${variant.id === isActive ? 'bg-black text-white' : 'bg-white'}
   `}
   key={variant.id}
@@ -62,6 +62,9 @@ function VariantSelect({ product, selectedVariant, onVariantSelection, setSelect
     {variant.title}
   </h2>
 </button>
+</div>
+
+
 </div>
 
 

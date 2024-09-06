@@ -13,9 +13,9 @@ export default function Cart() {
 
     const [open, setOpen] = useState(true)
 
-    const {isCartOpen, closeCart, checkout, removeLineItem} = useContext(ShopContext)
+    const {isCartOpen, closeCart, checkout, removeLineItem, clearCheckoutAndCart, checkoutComplete, resetCheckoutComplete} = useContext(ShopContext)
 
-   
+   const webUrl = ""
 
     console.log(checkout)
 
@@ -30,39 +30,15 @@ const {fetchAllProducts, products, product, addItemToCheckout, fetchProductWithH
 const [selectedVariant, setSelectedVariant] = useState(product.variants );
 
 
+const navigate = useNavigate();
 
 
-// const navigate = useNavigate();
-// let { handle } = useParams()
-
-
-
-
-// useEffect(() => {
-//   fetchProductWithHandle(handle)
-//   .then(data => console.log(data))
-// }, [fetchProductWithHandle, handle])
-
-// useEffect(() => {
- 
-//  ( async ()=> {
-//   await fetchAllProducts()
-//   setSelectedVariant(product.variants && product.variants[0].id)
-// } )()
-// }, [fetchAllProducts, setSelectedVariant, product])
-
-
-// console.log("products", product)
-
-// if (!product.title) return <div>loading...</div>
-
-// if (!product.variants) return null;
-
-// if (!quantity) return null;
-
-
-
-
+useEffect(() => {
+  if (checkoutComplete) {
+    navigate('/Home'); // Navigate to your custom thank you page
+    resetCheckoutComplete(); // Reset the state for future checkouts
+  }
+}, [checkoutComplete, navigate, resetCheckoutComplete]);
 
 
 
@@ -78,17 +54,6 @@ const [selectedVariant, setSelectedVariant] = useState(product.variants );
 
 
 
-    // const handleAddToCart = () => {
-    //   if (selectedVariant && quantity > 0) {
-    //     addItemToCheckout(selectedVariant, quantity); // Pass quantity to addItemToCheckout
-    //   } else {
-    //     // Handle error or notification if variant or quantity is invalid
-    //     console.error("Please select a variant and quantity before adding to cart");
-    //   }
-      
-    //   console.log("17thJune", selectedVariant, quantity)
-    // };
-    
 
   return (
     
@@ -289,6 +254,13 @@ const [selectedVariant, setSelectedVariant] = useState(product.variants );
                       <a
                         href={checkout?.webUrl}
                         className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 "
+
+                        onClick={() => {
+                          if (checkout.completedAt) {
+                            clearCheckoutAndCart();
+                          }
+                        }}
+
                       >
                         Checkout
                       </a>:<a disable className="flex items-center justify-center rounded-md border border-transparent bg-gray-500 px-6 py-3 text-base font-medium text-white shadow-sm  ">Checkout</a>

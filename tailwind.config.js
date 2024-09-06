@@ -14,7 +14,22 @@ module.exports = {
 
 
 
-    extend: {},
+    extend: {
+
+
+      fontFamily: {
+        regular: ['cardinalfruitweb-regular-TRIAL', 'sans-serif'],
+        italic: ['cardinalfruitweb-italic-TRIAL', 'sans-serif'],
+        apfel: ['ApfelGrotezk-Regular', 'sans-serif'],
+        suisse: ['SuisseIntl-Regular' , 'sans-serif']
+      },
+
+      colors: {
+        "base-color": "#EBEBEB",
+        "subtext-color": "#868686",
+      }
+
+    },
   },
   plugins: [],
 }

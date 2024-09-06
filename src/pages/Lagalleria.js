@@ -2,6 +2,8 @@ import React, {useContext, useEffect, useState} from 'react'
 import { ShopContext } from '../context/shopContext'
 import Navigation from "../components/Navigation"
 import { Link } from 'react-router-dom'
+import galleriaimage from "../Img/galleriaimage.png"
+import Footer from '../components/Footer'
 
 
 export default function Lagalleria() {
@@ -28,16 +30,38 @@ export default function Lagalleria() {
   return (
 
 
+    <>
 
-    <div className='bg-amber-50'>
+    <div className='h-screen w-full relative'>
+
+      <img className='h-full w-full object-cover absolute' src={galleriaimage} alt=""  />
 
 
-    <Navigation/>    
+    <Navigation/>  
 
-    <div className='grid grid-cols-3 gap-3'>
+
+
+<h1 className='tracking-tighter text-5xl relative text-center font-italic mt-80'>Introducing the all new</h1>
+
+<h1 className='tracking-tighter text-9xl relative text-center font-regular text-white'>La Galleria</h1>
+
+<p className='tracking-tighter relative font-apfel mx-48 text-center'>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+
+
+<div className='text-center mt-9'>
+<button className='rounded-md bg-black tracking-tighter text-lg px-28 py-1  border-1 relative  text-white '>Coming Soon</button>
+</div>
+
+
+
+
+
+
+     <div className='grid grid-cols-3 gap-3'>
 
        {/* This is a seperate collection, to change the collection change the number in collections[?].products.map */}
-
+{/* 
         {collections.length > 0 && ( // Check if collections exist
         collections[0].products.map((product) => (
 
@@ -57,13 +81,20 @@ export default function Lagalleria() {
 
 
 ))
-      )} 
+      )}  */}
 
-        
+      
      </div>   
         
         
 
         </div>
+
+
+
+
+<Footer/>
+
+</>
   )
 }

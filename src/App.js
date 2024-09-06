@@ -11,7 +11,7 @@ import Lagalleria from "./pages/Lagalleria";
 import Photobooths from "./pages/Photobooths";
 import EventDetails from "./pages/EventDetails";
 import EventList from "./pages/EventList";
-import Rome from "./pages/Rome";
+// import Rome from "./pages/Rome";
 
 
 
@@ -32,7 +32,7 @@ function App() {
 
         <Route path="/" element={<Home />} />
 
-        <Route path="/Rome" element={<Rome />} />
+        {/* <Route path="/Rome" element={<Rome />} /> */}
 
         <Route path="/Shop" element={<Shop />} />
 
