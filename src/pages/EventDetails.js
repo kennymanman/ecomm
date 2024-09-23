@@ -24,13 +24,13 @@ export default function EventDetails() {
 
   console.log(id ,"check")
 
-  // const defaultProps = {
-  //   center: {
-  //     lat: 6.422842,
-  //     lng: 3.452599
-  //   },
-  //   zoom: 11
-  // };
+  const defaultProps = {
+    center: {
+      lat: 6.422842,
+      lng: 3.452599
+    },
+    zoom: 11
+  };
 
 
 
@@ -41,7 +41,7 @@ const getEntryById = async () => {
 try {
 await client.getEntry(id).then((entries) => {
       console.log(entries, "jaachi")
-      console.log(defaultProps);
+      
       setEventFullDetails(entries)
 })
   
@@ -59,13 +59,13 @@ await client.getEntry(id).then((entries) => {
 
  
 
-    const defaultProps = {
-      center: {
-        lat: eventFullDetails?.fields?.eventLocation.lat,
-        lng: eventFullDetails?.fields?.eventLocation.lon,
-      },
-      zoom: 11
-    };
+    // const defaultProps = {
+    //   center: {
+    //     lat: eventFullDetails?.fields?.eventLocation.lat,
+    //     lng: eventFullDetails?.fields?.eventLocation.lon,
+    //   },
+    //   zoom: 11
+    // };
 
 
   
@@ -203,10 +203,13 @@ await client.getEntry(id).then((entries) => {
 
 
         <div
+      
           lat={eventFullDetails?.fields?.eventLocation.lat}
           lng={eventFullDetails?.fields?.eventLocation.lon}
           text="My Marker"
         />
+
+
       </GoogleMapReact>
 </div>
 

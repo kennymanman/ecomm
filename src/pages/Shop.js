@@ -36,7 +36,7 @@ export default function Shop() {
     <Navigation/>    
 
 
-    <h1 className="text-8xl tracking-tighter font-italic mt-7">Store</h1>
+    <h1 className="text-8xl tracking-tighter font-italic mt-7">Ngozi</h1>
 
     <hr className='border-black'/>
 

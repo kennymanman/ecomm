@@ -12,7 +12,7 @@ import Footer from "../components/Footer"
 import ContactPopup from '../components/ContactPopup';
 import Cleanearth from "../Img/Cleanearth.png"
 import axios from 'axios';
-
+import KlaviyoForm from '../components/klaviyoForm';
 
 
 
@@ -70,74 +70,52 @@ function Home() {
 
 
 
-//For Klaviyo.
-  // useEffect(() => {
-  //   // Load Klaviyo script
-  //   const script = document.createElement('script');
-  //   script.src = "https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=RuSVyp";
-  //   script.async = true;
-  //   document.body.appendChild(script);
-
-  //   return () => {
-  //     // Clean up script when component unmounts
-  //     document.body.removeChild(script);
-  //   };
-  // }, []);
 
 
-
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (window._klOnsite) {
-  //     window._klOnsite.push(['identify', { $email: email }]);
-  //     window._klOnsite.push(['trackSubmit', 'TW8mF2', { $email: email }]);
-  //   }
-  //   setEmail(''); // Clear the input after submission
-  // };
-
-
-
-
-
-
-
-
-
-
-
-
+//Klaviyo
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
-
+  
+    const formData = new FormData();
+    formData.append('email', email);
+  
     try {
       const response = await axios.post(
         'https://manage.kmail-lists.com/subscriptions/subscribe?a=VfdLWZ&g=UhFGWN',
+        formData,
         {
-          profiles: [{ email: email }],
-        },
-      
-        {
-            method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            'Api-Key': 'pk_be0834d784fa91e7a523cd056dff3ee90f', // Replace with your actual Klaviyo private API key
+            'Content-Type': 'multipart/form-data',
           },
         }
       );
-
+  
       if (response.status === 200) {
         setMessage('Thank you for subscribing!');
         setEmail('');
-      } else {
-        setMessage('An error occurred. Please try again.');
+      }
+      else {
+       setMessage('An error occurred. Please try again.');
+       setEmail('');
       }
     } catch (error) {
       console.error('Error:', error);
-      setMessage('An error occurred. Please try again.');
+      setMessage('');
+      setEmail('');
     }
   };
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -493,7 +471,6 @@ Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, wh
 
 
 
-
       <form onSubmit={handleSubmit} className="px-8  pb-8 mb-4 w-full max-w-lg">
 
       <h2 className='text-5xl relative tracking-tighter text-center font-regular'>Join the Famous & Unknown<br/>Community</h2>
@@ -501,9 +478,9 @@ Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, wh
 
 
         <div className="mb-4">
-          {/* <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
             Email
-          </label> */}
+          </label> 
           <input
             required
             className="shadow appearance-none border border-black  rounded w-full py-2 px-3  leading-tight bg-transparent focus:outline-none focus:shadow-outline"
@@ -517,12 +494,12 @@ Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, wh
         </div>
        
         <div className="text-center">
-          <button
+           <button
             className="bg-black hover:bg-white text-white hover:text-black  font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
             become a member
-          </button>
+          </button> 
           
           
         </div>
@@ -532,6 +509,9 @@ Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, wh
     </div>
 
 
+
+
+    
 
 </div>
 
@@ -550,14 +530,14 @@ Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, wh
 
 
 {/* Newsletter Signup div with Klaviyo */}
-<div className=''>
+{/* <div className=''>
 
 <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=RuSVyp"></script>
 
 <div class="klaviyo-form-TW8mF2"/>
 
 
-</div>
+</div> */}
 
 
 
